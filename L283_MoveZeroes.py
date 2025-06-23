@@ -13,11 +13,8 @@ class Solution:
         # return nums
 
         left=right=0                    #2 pointers
-        while right!=len(nums):
+        for right in range(len(nums)):
             if nums[right]!=0:
                 nums[left],nums[right]=nums[right],nums[left]
                 left+=1
-                right+=1
-            else:
-                right+=1
         return nums
