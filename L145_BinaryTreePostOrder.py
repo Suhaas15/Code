@@ -19,23 +19,49 @@ class Solution:
         # post(root)
         # return res
 
-        if not node:
-            return []
-            
-        stack1=[root]
-        stack2=[]
+        # def IterativePostOrderWith2Stacks(node):
+        #     if not node:
+        #         return []
+                
+        #     stack1=[root]
+        #     stack2=[]
+    
+        #     while stack1:
+        #         node=stack1.pop()
+        #         stack2.append(node)
+    
+        #         if node.left:
+        #             stack1.append(node.left)
+        #         if node.right:
+        #             stack1.append(node.right)
+    
+        #     while stack2:
+        #         node=stack2.pop()
+        #         res.append(node.val)
+                
+        # ItertativePreOrderWith2Stacks(root)
+        # return res
 
-        while stack1:
-            node=stack1.pop()
-            stack2.append(node)
+        def IterativePostWith1Stack(node):
+            if not node:
+                return []
 
-            if node.left:
-                stack1.append(node.left)
-            if node.right:
-                stack1.append(node.right)
+            stack=[]
+            current=node
+            last_visited=None
 
-        while stack2:
-            node=stack2.pop()
-            res.append(node.val)
+            while stack or current:
+                while current:
+                    stack.append(current)
+                    current=current.left
 
+                peek_node=stack[-1]
+
+                if peek_node.right and last_visited!=peek_node.right:
+                    current=peak_node.right
+                else:
+                    res.append(peek_node.val)
+                    last_visited=current
+                    
+        IterativePostWith1Stack(root)
         return res
