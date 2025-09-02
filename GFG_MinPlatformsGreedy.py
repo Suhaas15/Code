@@ -22,8 +22,9 @@ class Solution:
             times.append([dep[i],'d'])
             times.append([arr[i],'a'])
         
-        times=sorted(times, key=lambda x:x[1])
-        times=sorted(times, key=lambda x:x[0])
+        # times=sorted(times, key=lambda x:x[1])
+        # times=sorted(times, key=lambda x:x[0])
+        times.sort()
         
         count,max_count=0,0
         
