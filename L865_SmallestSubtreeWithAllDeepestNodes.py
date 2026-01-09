@@ -1,0 +1,48 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def subtreeWithAllDeepest(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        # def func(n):
+        #     if not n:
+        #         return 0,None
+            
+        #     ld,ln,rd,rn = *func(n.left),*func(n.right)
+        #     return ((ld+1,n),(ld+1,ln),(rd+1,rn))[(ld>rd)-(ld<rd)]
+        
+        # return func(root)[1]
+
+        if not root:
+            return None
+        
+        parent={root:None}
+        q=deque([root])
+
+        last_level=[]
+
+        #BFS traversal
+        while q:
+            size=len(q)
+            last_level=[]
+            for _ in range(size):
+                node=q.popleft()
+                last_level.append(node)
+
+                if node.left:
+                    parent[node.left]=node
+                    q.append(node.left)
+                if node.right:
+                    parent[node.right]=node
+                    q.append(node.right)
+        
+        #last_level contains all deepest nodes
+        deepest=set(last_level)
+
+        #Move up until they meet
+        while len(deepest)>1:
+            deepest={parent[node] for node in deepest}
+        
+        return deepest.pop()
