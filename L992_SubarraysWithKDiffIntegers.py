@@ -6,10 +6,7 @@ class Solution:
             d=dict()
 
             for j in range(l):
-                if nums[j] in d:
-                    d[nums[j]]+=1
-                else:
-                    d[nums[j]]=1
+                d[nums[j]] = d.get(nums[j],0) + 1
                 
                 while len(d)>k:
                     d[nums[i]]-=1
