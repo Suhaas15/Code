@@ -2,22 +2,20 @@ from typing import List
 class Solution:
 
     def encode(self, strs: List[str]) -> str:
-        pieces=[]
-        for w in strs:
-            pieces.append(f"{len(w)}#{w}")
-        return "".join(pieces)
+        res = ""
+        for s in strs:
+            res += str(len(s)) + '#' + s
     def decode(self, s: str) -> List[str]:
-        res=[]
+        res = []
         i=0
-        n=len(s)
 
-        while i<n:
-            j=s.find("#",i)
-            length=int(s[i:j])
+        while i<len(s):
+            j=i
+            while s[j]!="#":
+                j+=1
+            length = int(s[i:j])
+            j=i+length
+            res.append(s[i:j])
+            i=j
 
-            i=j+1
-            word=s[i: i+length]
-            res.append(word)
-
-            i+=length
         return res
